@@ -11,8 +11,16 @@
 
     <a href="/15-418-Lock-Free-B-Plus-Tree/project-proposal.html">Project Proposal</a>
 
-    <p> This is our final project for 15-418. We will implement and optimize a lock free version of B+ trees,
-    often used when working with large amounts of data that cannot fit into main memory. </p>
+    <p> This is our final project for 15-418. We will implement and optimize a lock free version of B+ trees.
+    B+ trees are widely used in database and file systems due to their efficient structure for indexing and searching large amounts of data. 
+    Their balanced nature and ability to minimize disk accesses make them ideal for storing and retrieving data in systems where performance is crucial. 
+    Implementing B+ trees in a lock free manner can offer significant benefits, particularly in concurrent environments. 
+    Lock free implementations ensure that multiple threads can access and modify the tree concurrently without the need for traditional locking mechanisms, 
+    such as mutexes or semaphores. This approach enhances scalability and reduces contention, as threads can progress independently without being blocked by each other. 
+    Additionally, lock free implementations can lead to better overall system responsiveness and throughput, particularly in scenarios with high levels of concurrent access, 
+    making them highly desirable for modern, multithreaded applications. Our ultimate goal for this project is to implement a lock free structure for B+ trees that can 
+    compete with modern lock-based implementations, as well as analyze the situations in which the respective implementations out-perform each other. 
+    </p>
 
     <img src="sample-b-plus-tree.jpg" alt="b-plus-tree">
     
