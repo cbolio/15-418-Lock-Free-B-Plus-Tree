@@ -11,7 +11,30 @@
         <hr>
         URL: <a href="https://cbolio.github.io/15-418-Lock-Free-B-Plus-Tree/">Main Project Website</a>
         <hr>
-        SUMMARY: 
+        SUMMARY: We implemented a B+ tree data structure in C++ that supports lock free search, insertion, and deletion. 
+        We completed two different approaches to the structure, one using a chunk-based approach with state indicators and another using a batch-based approach (PALM trees). 
+        We analyzed the performance of these implementations compared to a basic sequential implementation and a public lock-based implementation on the GHC Intel Xeon 8-core machines. 
+        Our analysis looked at the difference between performance metrics of general benchmark cases, as well as search-dominant cases.
+        <hr>
+        BACKGROUND: We parallelized a basic B+ tree data structure. The encompassing data structure is the B+ tree itself. 
+        The public operations on the tree are the aforementioned search, insert, and delete. 
+        Additionally, the tree needs to maintain its balance for strong performance, so there are also split and merge functions that separate and combine nodes as needed during insertions and deletions. 
+        The tree structure contains inner-nodes/chunks which are their own structures. 
+        Each node/chunk contains an array of key-data pairs, where the key is a long and the data field is a pointer to the desired original data; in the chunk approach, each pair entry also holds a pointer to another entry to simulate a linked list within each chunk. 
+        The nodes/chunks have their own smaller-scale search, insert, and delete operations; these are used to implement the overarching functions for the tree.
+        <br>
+        B+ trees are designed to be used on large amounts of data, often within database systems. 
+        As they need to handle a large number of queries, managing individual operations sequentially is far too slow for the real-life use cases. 
+        There are specific operations, like search, that can be easily performed in parallel to improve the overall runtime. 
+        In addition, through lock-based or lock free approaches, we can find a way to more safely overlap insertion and deletion with other operations. 
+        As independent threads will be working with the same B+ tree, there are many dependencies to consider. 
+        While concurrent queries can be performed safely, any other combination of an operation with insert or delete will potentially involve conflicting accesses to a part of the tree. 
+        There is a high potential for parallelism, especially in query-dominated situations, but it will need to be managed carefully to avoid corrupting the data structure. 
+        Batches of operations will be distributed among threads, similar to the usage of OpenMP, allowing multiple operations to be performed simultaneously. 
+        While locality is not a large consideration for this structure, there are considerations for locality in leaf-node traversal in the chunk-based approach. 
+        As this involves varying operations on a data structure, this application would not benefit from SIMD. 
+        <hr>
+        APPROACH/RESULTS: See the paper embedded below to view the approaches and results.
         <hr>
         <embed src="https://cbolio.github.io/15-418-Lock-Free-B-Plus-Tree/418-Final-Report.pdf" width="1000px" height="1000px" />
   </p>
